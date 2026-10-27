@@ -1,69 +1,21 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Sparkles, Upload, RefreshCw, UserCheck } from 'lucide-react';
+import React, { useState } from 'react';
+import { Sparkles, UserCheck } from 'lucide-react';
 import { PERSONAL_INFO } from '../data/portfolioData';
 
 export const Hero: React.FC = () => {
-  // Check localStorage for any custom uploaded photo first, otherwise use default
-  const [photoSrc, setPhotoSrc] = useState<string>(() => {
-    if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('volox_user_photo');
-      if (saved) return saved;
-    }
-    return PERSONAL_INFO.defaultAvatar;
-  });
-
-  const [hasCustomPhoto, setHasCustomPhoto] = useState<boolean>(() => {
-    if (typeof window !== 'undefined') {
-      return !!localStorage.getItem('volox_user_photo');
-    }
-    return false;
-  });
-
+  const [photoSrc, setPhotoSrc] = useState<string>(PERSONAL_INFO.defaultAvatar);
   const [imageError, setImageError] = useState<boolean>(false);
   const [retryWithAistudioPath, setRetryWithAistudioPath] = useState<boolean>(false);
-  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   // Handle image load error: try alternate public path before showing placeholder
   const handleImageError = () => {
-    if (!retryWithAistudioPath && !hasCustomPhoto) {
+    if (!retryWithAistudioPath) {
       // Try fallback to the direct aistudio public assets path
       setRetryWithAistudioPath(true);
       setPhotoSrc('/assets/aistudio/IMG_20260725_104424_631f8fb2.jpg');
     } else {
       // If alternate path also fails, trigger professional named placeholder
       setImageError(true);
-    }
-  };
-
-  const handlePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        if (event.target?.result) {
-          const resultUrl = event.target.result as string;
-          setPhotoSrc(resultUrl);
-          setImageError(false);
-          setHasCustomPhoto(true);
-          try {
-            localStorage.setItem('volox_user_photo', resultUrl);
-          } catch (err) {
-            console.warn("Storage quota exceeded, photo kept in active session state");
-          }
-        }
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const handleResetPhoto = () => {
-    localStorage.removeItem('volox_user_photo');
-    setHasCustomPhoto(false);
-    setImageError(false);
-    setRetryWithAistudioPath(false);
-    setPhotoSrc(PERSONAL_INFO.defaultAvatar);
-    if (fileInputRef.current) {
-      fileInputRef.current.value = '';
     }
   };
 
@@ -213,41 +165,15 @@ export const Hero: React.FC = () => {
                 )}
               </div>
 
-              {/* Photo Upload & Replacement Controls */}
+              {/* Profile Card Footer - Clean badge without upload button */}
               <div className="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
                 <span className="flex items-center gap-1.5">
                   <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-                  <span className="font-medium text-slate-300">Profile Photo</span>
+                  <span className="font-medium text-slate-300">Sri Hari Hara Sudhan</span>
                 </span>
-
-                <div className="flex items-center gap-2">
-                  <input
-                    ref={fileInputRef}
-                    type="file"
-                    accept="image/*"
-                    onChange={handlePhotoUpload}
-                    className="hidden"
-                    id="profile-photo-file-input"
-                  />
-                  <label
-                    htmlFor="profile-photo-file-input"
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-200 bg-slate-800 hover:bg-slate-700 hover:text-white cursor-pointer transition-colors border border-slate-700 shadow-sm"
-                    title="Upload and replace with your photo"
-                  >
-                    <Upload className="w-3 h-3 text-cyan-400" />
-                    <span>{hasCustomPhoto ? "Change Photo" : "Upload Photo"}</span>
-                  </label>
-
-                  {hasCustomPhoto && (
-                    <button
-                      onClick={handleResetPhoto}
-                      className="p-1.5 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800 transition-colors"
-                      title="Reset to default photo"
-                    >
-                      <RefreshCw className="w-3.5 h-3.5" />
-                    </button>
-                  )}
-                </div>
+                <span className="text-[11px] font-mono text-cyan-400/90 bg-cyan-500/10 px-2.5 py-1 rounded-md border border-cyan-500/20">
+                  Founder · VoloX
+                </span>
               </div>
 
             </div>
