@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { 
   Twitter, 
   Linkedin, 
@@ -16,8 +17,14 @@ export const OnlinePresence: React.FC = () => {
     <section id="presence" className="py-20 md:py-28 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+        {/* Section Header with Reveal on Scroll */}
+        <motion.div 
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16"
+        >
           <div className="max-w-2xl">
             <div className="text-xs font-semibold uppercase tracking-wider text-cyan-600 dark:text-cyan-400 mb-2">
               Verified Footprint
@@ -40,13 +47,20 @@ export const OnlinePresence: React.FC = () => {
             <span>GitHub: s04693400-lang</span>
             <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
           </a>
-        </div>
+        </motion.div>
 
-        {/* Public Profiles Grid - 3 Clean Columns */}
+        {/* Public Profiles Grid - 3 Clean Columns with Scroll Reveal */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
 
           {/* Twitter / X */}
-          <div className="p-6 rounded-2xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 flex flex-col justify-between shadow-sm hover:border-cyan-500/40 transition-colors">
+          <motion.div 
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.5, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
+            whileHover={{ y: -4, transition: { duration: 0.2 } }}
+            className="p-6 rounded-2xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 flex flex-col justify-between shadow-sm hover:border-cyan-500/40 transition-colors"
+          >
             <div>
               <div className="flex items-center justify-between mb-4">
                 <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-900 dark:text-white">
@@ -68,10 +82,17 @@ export const OnlinePresence: React.FC = () => {
               <span>{PERSONAL_INFO.socials.twitterHandle}</span>
               <ExternalLink className="w-3.5 h-3.5" />
             </a>
-          </div>
+          </motion.div>
 
           {/* LinkedIn */}
-          <div className="p-6 rounded-2xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 flex flex-col justify-between shadow-sm hover:border-cyan-500/40 transition-colors">
+          <motion.div 
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.5, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
+            whileHover={{ y: -4, transition: { duration: 0.2 } }}
+            className="p-6 rounded-2xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 flex flex-col justify-between shadow-sm hover:border-cyan-500/40 transition-colors"
+          >
             <div>
               <div className="flex items-center justify-between mb-4">
                 <div className="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-500">
@@ -93,10 +114,17 @@ export const OnlinePresence: React.FC = () => {
               <span>Search Profile</span>
               <Search className="w-3.5 h-3.5" />
             </a>
-          </div>
+          </motion.div>
 
           {/* GitHub */}
-          <div className="p-6 rounded-2xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 flex flex-col justify-between shadow-sm hover:border-cyan-500/40 transition-colors">
+          <motion.div 
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.5, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
+            whileHover={{ y: -4, transition: { duration: 0.2 } }}
+            className="p-6 rounded-2xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 flex flex-col justify-between shadow-sm hover:border-cyan-500/40 transition-colors"
+          >
             <div>
               <div className="flex items-center justify-between mb-4">
                 <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-900 dark:text-white">
@@ -118,20 +146,31 @@ export const OnlinePresence: React.FC = () => {
               <span>View GitHub Repositories</span>
               <ExternalLink className="w-3.5 h-3.5" />
             </a>
-          </div>
+          </motion.div>
 
         </div>
 
         {/* Verified Achievements Showcase */}
         <div>
-          <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-6">
+          <motion.h3 
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.5 }}
+            className="text-lg font-bold text-slate-900 dark:text-white mb-6"
+          >
             Documented Milestones
-          </h3>
+          </motion.h3>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {achievements.map((item) => (
-              <div
+            {achievements.map((item, idx) => (
+              <motion.div
                 key={item.id}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.5, delay: idx * 0.1, ease: [0.22, 1, 0.36, 1] }}
+                whileHover={{ y: -3, transition: { duration: 0.2 } }}
                 className="p-6 rounded-2xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 flex flex-col justify-between shadow-sm"
               >
                 <div>
@@ -152,7 +191,7 @@ export const OnlinePresence: React.FC = () => {
                   <CheckCircle className="w-3.5 h-3.5" />
                   <span>Verified milestone</span>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>

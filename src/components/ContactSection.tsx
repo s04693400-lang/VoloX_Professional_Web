@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { 
-  Mail, 
   Send, 
   Copy, 
   Check, 
   Twitter, 
   Linkedin, 
   MapPin, 
-  ExternalLink,
-  MessageSquare
+  ExternalLink
 } from 'lucide-react';
 import { PERSONAL_INFO } from '../data/portfolioData';
 
@@ -59,8 +58,14 @@ export const ContactSection: React.FC = () => {
     <section id="contact" className="py-20 md:py-28 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Section Header */}
-        <div className="max-w-3xl mb-16">
+        {/* Section Header with Reveal on Scroll */}
+        <motion.div 
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="max-w-3xl mb-16"
+        >
           <div className="text-xs font-semibold uppercase tracking-wider text-cyan-600 dark:text-cyan-400 mb-2">
             Initiate Collaboration
           </div>
@@ -70,15 +75,24 @@ export const ContactSection: React.FC = () => {
           <p className="mt-4 text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
             Interested in discussing AI architectures, processor simulations, robotics builds, or potential research collaborations with VoloX Projects? Let's connect.
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           
           {/* Contact Details & Collaboration Message (5 cols) */}
-          <div className="lg:col-span-5 space-y-6">
+          <motion.div 
+            initial={{ opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:col-span-5 space-y-6"
+          >
             
             {/* Professional Message Card */}
-            <div className="p-7 rounded-2xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 shadow-sm">
+            <motion.div 
+              whileHover={{ y: -3, transition: { duration: 0.2 } }}
+              className="p-7 rounded-2xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 shadow-sm"
+            >
               <h3 className="text-base font-bold text-slate-900 dark:text-white mb-2">
                 Collaboration & Mentorship
               </h3>
@@ -95,7 +109,7 @@ export const ContactSection: React.FC = () => {
                   </span>
                   <button
                     onClick={handleCopyEmail}
-                    className="p-1.5 rounded-lg text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"
+                    className="p-1.5 rounded-lg text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors cursor-pointer"
                     title="Copy email to clipboard"
                   >
                     {copiedEmail ? <Check className="w-4 h-4 text-emerald-500" /> : <Copy className="w-4 h-4" />}
@@ -103,15 +117,18 @@ export const ContactSection: React.FC = () => {
                 </div>
               </div>
 
-              {/* General Region (No private address) */}
+              {/* General Region */}
               <div className="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center gap-2.5 text-xs text-slate-500 dark:text-slate-400">
                 <MapPin className="w-4 h-4 text-cyan-500 shrink-0" />
                 <span>Based in {PERSONAL_INFO.origin}</span>
               </div>
-            </div>
+            </motion.div>
 
-            {/* Quick Links */}
-            <div className="p-6 rounded-2xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 shadow-sm">
+            {/* Quick Links Card */}
+            <motion.div 
+              whileHover={{ y: -3, transition: { duration: 0.2 } }}
+              className="p-6 rounded-2xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 shadow-sm"
+            >
               <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-4">
                 Public Discussion & Updates
               </h4>
@@ -142,12 +159,18 @@ export const ContactSection: React.FC = () => {
                   <ExternalLink className="w-3.5 h-3.5" />
                 </a>
               </div>
-            </div>
+            </motion.div>
 
-          </div>
+          </motion.div>
 
-          {/* Functional Contact Form (7 cols) */}
-          <div className="lg:col-span-7">
+          {/* Functional Contact Form (7 cols) with Scroll Reveal */}
+          <motion.div 
+            initial={{ opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.6, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:col-span-7"
+          >
             <form 
               onSubmit={handleSubmit}
               className="p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl space-y-5"
@@ -227,7 +250,7 @@ export const ContactSection: React.FC = () => {
                   type="button"
                   onClick={handleCopyDraft}
                   disabled={!formData.message}
-                  className="inline-flex items-center gap-1.5 text-xs text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 disabled:opacity-40 transition-colors"
+                  className="inline-flex items-center gap-1.5 text-xs text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 disabled:opacity-40 transition-colors cursor-pointer"
                 >
                   {copiedDraft ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
                   <span>{copiedDraft ? "Copied draft!" : "Copy message text"}</span>
@@ -235,7 +258,7 @@ export const ContactSection: React.FC = () => {
 
                 <button
                   type="submit"
-                  className="px-6 py-3 text-xs sm:text-sm font-semibold text-white bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 rounded-xl shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/30 transition-all flex items-center gap-2"
+                  className="px-6 py-3 text-xs sm:text-sm font-semibold text-white bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 rounded-xl shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/30 transition-all flex items-center gap-2 cursor-pointer"
                 >
                   <span>Send via Email Client</span>
                   <Send className="w-4 h-4" />
@@ -243,7 +266,7 @@ export const ContactSection: React.FC = () => {
               </div>
 
             </form>
-          </div>
+          </motion.div>
 
         </div>
 

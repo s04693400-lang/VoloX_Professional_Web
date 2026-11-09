@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { 
   Sparkles, 
   Layout, 
@@ -28,8 +29,14 @@ export const SkillsSection: React.FC = () => {
     <section id="skills" className="py-20 md:py-28 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Section Header */}
-        <div className="max-w-3xl mb-16">
+        {/* Section Header with Reveal on Scroll */}
+        <motion.div 
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="max-w-3xl mb-16"
+        >
           <div className="text-xs font-semibold uppercase tracking-wider text-cyan-600 dark:text-cyan-400 mb-2">
             Disciplines & Focus Areas
           </div>
@@ -39,16 +46,21 @@ export const SkillsSection: React.FC = () => {
           <p className="mt-4 text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
             These cards represent active fields of self-directed research, practical laboratory tinkering, and continuous learning—grounded in passion, curiosity, and disciplined building rather than formal enterprise certifications.
           </p>
-        </div>
+        </motion.div>
 
-        {/* 7 Skill Cards Grid */}
+        {/* 7 Skill Cards Grid with Staggered Scroll Reveal */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {SKILL_CARDS.map((skill) => {
+          {SKILL_CARDS.map((skill, idx) => {
             const Icon = getIcon(skill.iconName);
 
             return (
-              <div
+              <motion.div
                 key={skill.id}
+                initial={{ opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.5, delay: (idx % 6) * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                whileHover={{ y: -4, transition: { duration: 0.2 } }}
                 className="p-6 rounded-2xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 hover:border-cyan-500/50 transition-all duration-300 flex flex-col justify-between shadow-sm hover:shadow-lg group"
               >
                 <div>
@@ -77,16 +89,16 @@ export const SkillsSection: React.FC = () => {
                     Active Topics
                   </div>
                   <div className="flex flex-wrap gap-x-2 gap-y-1 text-xs text-slate-600 dark:text-slate-400">
-                    {skill.topics.map((t, idx) => (
-                      <span key={idx} className="flex items-center gap-2">
+                    {skill.topics.map((t, topicIdx) => (
+                      <span key={topicIdx} className="flex items-center gap-2">
                         <span>{t}</span>
-                        {idx < skill.topics.length - 1 && <span className="text-slate-500" aria-hidden="true">·</span>}
+                        {topicIdx < skill.topics.length - 1 && <span className="text-slate-500" aria-hidden="true">·</span>}
                       </span>
                     ))}
                   </div>
                 </div>
 
-              </div>
+              </motion.div>
             );
           })}
         </div>

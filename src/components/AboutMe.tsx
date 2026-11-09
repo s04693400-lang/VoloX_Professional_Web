@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { 
   Cpu, 
   Bot, 
@@ -7,11 +8,9 @@ import {
   Sparkles, 
   Zap, 
   Compass, 
-  ShieldCheck,
-  CheckCircle2,
+  ShieldCheck, 
   BookOpen
 } from 'lucide-react';
-import { PERSONAL_INFO } from '../data/portfolioData';
 
 export const AboutMe: React.FC = () => {
   const [activeInterest, setActiveInterest] = useState<number>(0);
@@ -71,8 +70,14 @@ export const AboutMe: React.FC = () => {
     <section id="about" className="py-20 md:py-28 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Section Header */}
-        <div className="max-w-3xl mb-16">
+        {/* Section Header with Reveal-on-Scroll */}
+        <motion.div 
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="max-w-3xl mb-16"
+        >
           <div className="text-xs font-semibold uppercase tracking-wider text-cyan-600 dark:text-cyan-400 mb-2">
             Origins & Aspirations
           </div>
@@ -82,14 +87,21 @@ export const AboutMe: React.FC = () => {
           <p className="mt-4 text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
             I am a young aspiring innovator from Tamil Nadu, India, driven by an insatiable curiosity for how the modern technological world is built—and how it can be reimagined.
           </p>
-        </div>
+        </motion.div>
 
         {/* Narrative & Purpose Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
           
-          {/* Main Story & Core Philosophy */}
+          {/* Main Story & Core Philosophy Cards */}
           <div className="lg:col-span-6 space-y-6 text-slate-600 dark:text-slate-300 leading-relaxed text-base">
-            <div className="p-6 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800">
+            <motion.div 
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              whileHover={{ y: -3, transition: { duration: 0.2 } }}
+              className="p-6 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 shadow-sm transition-colors hover:border-cyan-500/30"
+            >
               <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-3 flex items-center gap-2">
                 <BookOpen className="w-5 h-5 text-cyan-500" />
                 <span>The Learning & Building Philosophy</span>
@@ -100,20 +112,33 @@ export const AboutMe: React.FC = () => {
               <p className="text-sm leading-relaxed">
                 Whether it involves disassembling hardware concepts, exploring the logical structure of a central processor, coding algorithms, or practicing kata techniques on the karate mat, I believe mastery is forged through relentless curiosity and consistent daily practice.
               </p>
-            </div>
+            </motion.div>
 
-            <div className="p-6 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800">
+            <motion.div 
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.5, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
+              whileHover={{ y: -3, transition: { duration: 0.2 } }}
+              className="p-6 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 shadow-sm transition-colors hover:border-cyan-500/30"
+            >
               <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-3">
                 Bridging Hardware, Software & Human Discipline
               </h3>
               <p className="text-sm leading-relaxed">
                 True innovation rarely lives in a single isolated field. By simultaneously exploring low-level silicon architectures, high-level artificial intelligence workflows, physical robotics, and martial arts discipline, I strive to cultivate a well-rounded foundation for building impactful technology products.
               </p>
-            </div>
+            </motion.div>
           </div>
 
-          {/* Interactive Core Interests Matrix */}
-          <div className="lg:col-span-6">
+          {/* Interactive Core Interests Matrix Card */}
+          <motion.div 
+            initial={{ opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.6, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:col-span-6"
+          >
             <div className="p-6 rounded-2xl bg-slate-900 text-slate-100 border border-slate-800 shadow-xl">
               <div className="flex items-center justify-between mb-4 pb-3 border-b border-slate-800">
                 <span className="text-xs font-mono uppercase tracking-wider text-cyan-400">
@@ -130,10 +155,12 @@ export const AboutMe: React.FC = () => {
                   const Icon = item.icon;
                   const isSelected = activeInterest === index;
                   return (
-                    <button
+                    <motion.button
                       key={item.title}
                       onClick={() => setActiveInterest(index)}
-                      className={`text-left p-3 rounded-xl border transition-all duration-200 flex items-start gap-2.5 ${
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      className={`text-left p-3 rounded-xl border transition-all duration-200 flex items-start gap-2.5 cursor-pointer ${
                         isSelected
                           ? 'bg-cyan-500/10 border-cyan-500/50 text-white shadow-sm'
                           : 'bg-slate-950/60 border-slate-800/80 text-slate-300 hover:border-slate-700 hover:text-white'
@@ -144,13 +171,19 @@ export const AboutMe: React.FC = () => {
                         <div className="text-xs font-semibold truncate leading-tight">{item.title}</div>
                         <div className="text-[10px] text-slate-400 truncate mt-0.5">{item.tag}</div>
                       </div>
-                    </button>
+                    </motion.button>
                   );
                 })}
               </div>
 
-              {/* Dynamic Detail Card */}
-              <div className="p-4 rounded-xl bg-slate-950 border border-cyan-500/20">
+              {/* Dynamic Detail Card with AnimatePresence */}
+              <motion.div 
+                key={activeInterest}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+                className="p-4 rounded-xl bg-slate-950 border border-cyan-500/20"
+              >
                 <div className="flex items-center gap-2 mb-2">
                   <span className="text-xs font-semibold text-cyan-400 uppercase tracking-wider">
                     {interestDetails[activeInterest].tag}
@@ -163,10 +196,10 @@ export const AboutMe: React.FC = () => {
                 <p className="text-sm text-slate-300 leading-relaxed">
                   {interestDetails[activeInterest].description}
                 </p>
-              </div>
+              </motion.div>
 
             </div>
-          </div>
+          </motion.div>
 
         </div>
 

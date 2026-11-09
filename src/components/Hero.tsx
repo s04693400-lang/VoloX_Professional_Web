@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { Sparkles, UserCheck } from 'lucide-react';
 import { PERSONAL_INFO } from '../data/portfolioData';
 
@@ -22,9 +23,12 @@ export const Hero: React.FC = () => {
   return (
     <section className="relative pt-12 pb-20 md:pt-20 md:pb-28 overflow-hidden">
       {/* Subtle radial glow aura */}
-      <div 
+      <motion.div 
         aria-hidden="true" 
-        className="pointer-events-none absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-tr from-cyan-500/10 via-indigo-500/10 to-purple-500/10 rounded-full blur-3xl opacity-70"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 0.7, scale: 1 }}
+        transition={{ duration: 1.2, ease: "easeOut" }}
+        className="pointer-events-none absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-tr from-cyan-500/10 via-indigo-500/10 to-purple-500/10 rounded-full blur-3xl"
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -33,42 +37,77 @@ export const Hero: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-stretch">
           
           {/* Left Column: Typographic Hierarchy */}
-          <div className="lg:col-span-7 flex flex-col justify-center">
+          <motion.div 
+            initial={{ opacity: 0, y: 28 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:col-span-7 flex flex-col justify-center"
+          >
             
             {/* Clean unboxed kicker */}
-            <div className="flex flex-wrap items-center gap-2 text-xs font-semibold tracking-wider uppercase text-cyan-600 dark:text-cyan-400 mb-4">
+            <motion.div 
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="flex flex-wrap items-center gap-2 text-xs font-semibold tracking-wider uppercase text-cyan-600 dark:text-cyan-400 mb-4"
+            >
               <span>VoloX Official Website</span>
               <span aria-hidden="true">·</span>
               <span>{PERSONAL_INFO.origin}</span>
               <span aria-hidden="true">·</span>
               <span>Founded by {PERSONAL_INFO.name}</span>
-            </div>
+            </motion.div>
 
             {/* Display Name */}
-            <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-800 dark:text-slate-200 mb-2">
+            <motion.h2 
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.15 }}
+              className="text-xl sm:text-2xl font-bold tracking-tight text-slate-800 dark:text-slate-200 mb-2"
+            >
               {PERSONAL_INFO.name}
-            </h2>
+            </motion.h2>
 
             {/* Main Headline */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.15] mb-6 [text-wrap:balance]">
+            <motion.h1 
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.15] mb-6 [text-wrap:balance]"
+            >
               Young Innovator. <br className="hidden sm:inline" />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500">
                 Future Engineer.
               </span> <br className="hidden sm:inline" />
               Technology Creator.
-            </h1>
+            </motion.h1>
 
             {/* Lead Copy & VoloX Intro */}
-            <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed mb-4 max-w-2xl">
+            <motion.p 
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.28 }}
+              className="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed mb-4 max-w-2xl"
+            >
               {PERSONAL_INFO.description}
-            </p>
+            </motion.p>
 
-            <p className="text-sm sm:text-base text-slate-500 dark:text-slate-400 leading-relaxed mb-8 max-w-2xl">
+            <motion.p 
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.34 }}
+              className="text-sm sm:text-base text-slate-500 dark:text-slate-400 leading-relaxed mb-8 max-w-2xl"
+            >
               Founder of <span className="text-slate-900 dark:text-white font-semibold">VoloX Projects</span>, a forward-thinking initiative dedicated to exploring next-generation ideas in artificial intelligence, robotics, custom processor design, and connected technology.
-            </p>
+            </motion.p>
 
             {/* Three Primary Actions */}
-            <div className="flex flex-wrap items-center gap-3 sm:gap-4">
+            <motion.div 
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="flex flex-wrap items-center gap-3 sm:gap-4"
+            >
               <a
                 href="#projects"
                 className="px-5 py-3 text-sm font-semibold text-white bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 rounded-xl shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/30 transition-all duration-200 whitespace-nowrap"
@@ -87,12 +126,17 @@ export const Hero: React.FC = () => {
               >
                 Contact Me →
               </a>
-            </div>
+            </motion.div>
 
-          </div>
+          </motion.div>
 
           {/* Right Column: Profile & Technology Visual Anchor */}
-          <div className="lg:col-span-5 flex flex-col justify-center items-center lg:items-end">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95, y: 24 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:col-span-5 flex flex-col justify-center items-center lg:items-end"
+          >
             <div className="w-full max-w-md p-6 rounded-3xl bg-slate-900/60 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 backdrop-blur-xl shadow-2xl relative group">
               
               {/* Corner decorative tech accents */}
@@ -165,7 +209,7 @@ export const Hero: React.FC = () => {
                 )}
               </div>
 
-              {/* Profile Card Footer - Clean badge without upload button */}
+              {/* Profile Card Footer */}
               <div className="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
                 <span className="flex items-center gap-1.5">
                   <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
@@ -177,29 +221,34 @@ export const Hero: React.FC = () => {
               </div>
 
             </div>
-          </div>
+          </motion.div>
 
         </div>
 
         {/* 4-Item Attributes & Focus Row Below Hero Split */}
-        <div className="mt-16 pt-8 border-t border-slate-200/80 dark:border-slate-800/80 grid grid-cols-2 md:grid-cols-4 gap-6 text-left">
-          <div>
-            <div className="text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Origin</div>
-            <div className="text-sm sm:text-base font-semibold text-slate-900 dark:text-white">Tamil Nadu, India</div>
-          </div>
-          <div>
-            <div className="text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Initiative</div>
-            <div className="text-sm sm:text-base font-semibold text-slate-900 dark:text-white">VoloX Projects</div>
-          </div>
-          <div>
-            <div className="text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Current Scope</div>
-            <div className="text-sm sm:text-base font-semibold text-slate-900 dark:text-white">8 Active Projects</div>
-          </div>
-          <div>
-            <div className="text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Discipline</div>
-            <div className="text-sm sm:text-base font-semibold text-slate-900 dark:text-white">Tech & Martial Arts</div>
-          </div>
-        </div>
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.45 }}
+          className="mt-16 pt-8 border-t border-slate-200/80 dark:border-slate-800/80 grid grid-cols-2 md:grid-cols-4 gap-6 text-left"
+        >
+          {[
+            { label: "Origin", value: "Tamil Nadu, India" },
+            { label: "Initiative", value: "VoloX Projects" },
+            { label: "Current Scope", value: "8 Active Projects" },
+            { label: "Discipline", value: "Tech & Martial Arts" }
+          ].map((item, index) => (
+            <motion.div 
+              key={item.label}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.5 + index * 0.06 }}
+            >
+              <div className="text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">{item.label}</div>
+              <div className="text-sm sm:text-base font-semibold text-slate-900 dark:text-white">{item.value}</div>
+            </motion.div>
+          ))}
+        </motion.div>
 
       </div>
     </section>

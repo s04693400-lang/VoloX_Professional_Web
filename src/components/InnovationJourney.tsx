@@ -1,12 +1,12 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { 
   Compass, 
   Code2, 
   Cpu, 
   Layers, 
   Rocket, 
-  Target,
-  ArrowRight
+  Target 
 } from 'lucide-react';
 import { JOURNEY_MILESTONES } from '../data/portfolioData';
 
@@ -27,8 +27,14 @@ export const InnovationJourney: React.FC = () => {
     <section id="journey" className="py-20 md:py-28 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Section Header */}
-        <div className="max-w-3xl mb-16">
+        {/* Section Header with Reveal-on-Scroll */}
+        <motion.div 
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="max-w-3xl mb-16"
+        >
           <div className="text-xs font-semibold uppercase tracking-wider text-cyan-600 dark:text-cyan-400 mb-2">
             Continuous Evolution
           </div>
@@ -38,16 +44,23 @@ export const InnovationJourney: React.FC = () => {
           <p className="mt-4 text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
             An ongoing exploration of technology, engineering rigor, and creative problem solving. Each chapter represents an expanding horizon of self-taught mastery and practical experimentation.
           </p>
-        </div>
+        </motion.div>
 
-        {/* Editorial Timeline (No fake dates, natural ongoing sequence) */}
+        {/* Editorial Timeline */}
         <div className="relative border-l border-slate-200 dark:border-slate-800 ml-4 sm:ml-8 pl-6 sm:pl-10 space-y-12">
           {JOURNEY_MILESTONES.map((milestone, index) => {
             const Icon = getIcon(milestone.iconName);
             const stepNum = String(index + 1).padStart(2, '0');
 
             return (
-              <div key={milestone.id} className="relative group">
+              <motion.div 
+                key={milestone.id} 
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+                className="relative group"
+              >
                 
                 {/* Timeline node marker */}
                 <div className="absolute -left-[35px] sm:-left-[51px] top-1.5 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-slate-900 border-2 border-cyan-500/80 flex items-center justify-center text-cyan-400 shadow-md shadow-cyan-500/20 group-hover:scale-110 transition-transform">
@@ -55,7 +68,10 @@ export const InnovationJourney: React.FC = () => {
                 </div>
 
                 {/* Milestone Content Box */}
-                <div className="p-6 sm:p-7 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 hover:border-cyan-500/40 transition-colors shadow-sm">
+                <motion.div 
+                  whileHover={{ y: -3, transition: { duration: 0.2 } }}
+                  className="p-6 sm:p-7 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 hover:border-cyan-500/40 transition-colors shadow-sm"
+                >
                   
                   {/* Clean unboxed header */}
                   <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
@@ -75,7 +91,7 @@ export const InnovationJourney: React.FC = () => {
                     {milestone.description}
                   </p>
 
-                  {/* Core Learning Focus Area Pills replaced with unboxed tags with dividers */}
+                  {/* Core Learning Focus Area */}
                   <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex flex-wrap items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
                     <span className="font-semibold text-slate-700 dark:text-slate-300">Core Areas:</span>
                     {milestone.learningFocus.map((focus, i) => (
@@ -86,9 +102,9 @@ export const InnovationJourney: React.FC = () => {
                     ))}
                   </div>
 
-                </div>
+                </motion.div>
 
-              </div>
+              </motion.div>
             );
           })}
         </div>
